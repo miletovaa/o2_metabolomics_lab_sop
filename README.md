@@ -369,11 +369,18 @@ To do so, go to the [template repository](https://github.com/miletovaa/metabolom
  
 Fill in the repository name, description.
 
-## 2. Clone the repository
+## 2. Fill README.md
+
+Assign proper values in **README.md** file by filling in the placeholders for 
+    - project id *(lab unique identifier of the project, e.g., p01, p02)*,
+    - project name *(must be the same as the name of the repository)*,
+    - description *(short description of the project: goals, objectives, tools, etc.)*.
+
+## 3. Clone the repository
 
 Follow the instructions in the **[Clone the repository](#1-clone-the-repository)** section to clone the newly created repository to your local machine.
 
-## 3. Align template with your goals
+## 4. Align template with your goals
 
 Given template is a general maximalistic structure, framework, with default configuration files, example scripts and placeholders to cover a wide range of potential use cases and make it instantly usable for various projects.
 
@@ -381,11 +388,11 @@ After cloning the repository, review the template structure and files to ensure 
 
 The repository may *(and most probably will)* contain files and folders that are not relevant to your specific needs. Remove any unnecessary files and folders to keep the repository clean and focused on your project.
 
-## 4. Setup the environment
+## 5. Setup the environment
 
 Follow the instructions in the **[Setup the environment](#3-setup-the-environment)** section to create and configure the conda environment for your project.
 
-## 5. Maintain the repository
+## 6. Maintain the repository
 
 Since the new repository is already having required structure and configuration files, you can directly proceed to the **[Maintenance guide](#maintenance-guide)** section to learn how to update and maintain the default project setup.
 
@@ -507,6 +514,76 @@ Template of the repository structure can be found [here](https://github.com/mile
 
 Always **start new project by using this template** as a base and **follow** the established structure when **adding** new files or folders to existing repositories.
 
+
 ## Naming Conventions
 
-- Use in output directory id of the experiment param.yaml you used
+
+These ensure files sort correctly, remain unique, and stay searchable.
+
+### Output files 
+
+`[PROJECT ID]_[PROJECT NAME]_[PARAMS]_[STEP ID]_[TYPE]_[DESCR]_[DATE].extension`
+
+
+| Component | Meaning | Examples |
+|-----------|---------|----------|
+| PROJECT ID  | unique project identifier for in-lab tracking | p01, p02 |
+| PROJECT NAME | short code = repository name | lcms_biomarker_discovery |
+| PARAMS | name of the used `params/` yml file | 001_anp, 002_rf |
+| STEP ID | id of the step is given in README.md and in the name of the script | s01prep, s02protstats |
+| TYPE |  detailed below | raw, prep, norm, stats, ml, viz, fig, output, report |
+| DESCR | short semantic description | median, median_is, pca, group_median_histo |
+| DATE | in format `YYYYMMDD` | 20251120 |
+
+
+| Type       | Meaning / Typical content | Examples of descriptions                                |
+|------------|---------------------------|-------------------------------|
+| prep       | Converted, cleaned, filtered data | imputed, zero_thresholded.                        |
+| norm       | Normalized data | median, median_is               |
+| stats      | Statistical results | anova, kw, is_normal          |
+| ml         | Random forest outputs, predictions | rf_model, rf_predictions                        |
+| viz        | Numerical data needed for plots  | pca_scores, pca_loadings  |
+| fig        | Figures (png, pdf, svg) | group_median_histo         |
+| output     | Final processed data of the step| No description needed |
+| report     | Human-readable summaries (markdown, pdf, html) | summary, overview            |
+
+
+> Example:
+> - p01_lcms_biomarker_discovery_001_anp_s01prep_fig_imputed_per_feature_20251128.png
+> - p01_lcms_biomarker_discovery_001_anp_s01prep_norm_is_20251128.csv
+> - p01_lcms_biomarker_discovery_001_anp_s01prep_output_01prep_20251128.csv
+> - p01_lcms_biomarker_discovery_001_anp_s01prep_prep_imputed_20251128.csv
+> - p01_lcms_biomarker_discovery_001_anp_s01prep_stats_rsd_per_feature_20251128.csv
+> - p01_lcms_biomarker_discovery_001_an_s01prep_viz_rsd_per_feature_20251128.csv
+> - p01_lcms_biomarker_discovery_002_rf_s01prep_output_20251128.csv
+> - p01_lcms_biomarker_discovery_002_rf_s01prep_stats_rsd_per_feature_20251128.csv
+> - p01_lcms_biomarker_discovery_002_rf_s01prep_viz_rsd_per_feature_20251128.csv
+
+
+### Input files 
+
+`[PROJECT ID]_[PROJECT NAME]_raw_[DESCR]_[DATE].extension`
+
+
+| Component | Meaning | Examples |
+|-----------|---------|----------|
+| PROJECT ID  | unique project identifier for in-lab tracking | p01, p02 |
+| PROJECT NAME | short code = repository name | lcms_biomarker_discovery |
+| DESCR | short semantic description | rp, anp |
+| DATE | in format `YYYYMMDD` | 20251120 |
+
+
+> Examples:
+> - p01_lcms_biomarker_discovery_raw_rp_20251118.csv
+> - p01_lcms_biomarker_discovery_raw_anp_20251118.csv
+
+
+### Global Rules
+
+1. Use snake_case
+
+No spaces, English alphabet only, no uppercase inside names.
+
+2. Use YYYYMMDD for all dates
+
+This sorts chronologically.
